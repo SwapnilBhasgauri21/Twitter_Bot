@@ -270,3 +270,42 @@ SELECT tu.Name
 FROM TWITTER_USER AS tu 
 INNER JOIN TWEETS_DETAILS AS td On tu.Twitter_Handle  = td.Twitter_Handle
 WHERE td.Tweet_Text LIKE '%Jimmy%' OR td.Tweet_Text  LIKE '%triple-double%';
+
+/* 7 Questions */
+
+
+SELECT tu.Twitter_Handle
+FROM TWITTER_USER AS tu
+INNER JOIN TWEETS_DETAILS AS td On tu.Twitter_Handle  = td.Twitter_Handle
+WHERE td.Tweet_Text  LIKE '%LeBron James%' OR td.Tweet_Text LIKE '%Nike%';
+
+SELECT tu.Twitter_Handle, td.created_at
+FROM TWITTER_USER AS tu
+INNER JOIN TWEETS_DETAILS AS td On tu.Twitter_Handle  = td.Twitter_Handle
+WHERE td.Tweet_Text  LIKE '%LeBron James%' OR td.Tweet_Text LIKE '%Nike%';
+
+SELECT tu.Name, td.created_at, td.Tweet_Text 
+FROM TWITTER_USER AS tu
+INNER JOIN TWEETS_DETAILS AS td On tu.Twitter_Handle  = td.Twitter_Handle
+WHERE td.Tweet_Text  LIKE '%LeBron James%' OR td.Tweet_Text LIKE '%Nike%' and 
+created_at > DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+
+SELECT tu.Name, td.created_at, count(td.Tweet_Text) 
+FROM TWITTER_USER AS tu
+INNER JOIN TWEETS_DETAILS AS td On tu.Twitter_Handle  = td.Twitter_Handle
+WHERE td.Tweet_Text  LIKE '%LeBron James%' OR td.Tweet_Text LIKE '%Nike%' and 
+created_at > DATE_SUB(CURDATE(), INTERVAL 1 DAY);
+
+SELECT tg.Tags, MAX(tu.Followers_count)
+FROM TWEETS_DETAILS AS td 
+INNER JOIN Tweet_Tags AS tg ON td.TWEET_ID = tg.TWEET_ID
+INNER JOIN Twitter_User tu ON tu.Twitter_Handle = td.Twitter_Handle;
+
+SELECT tg.Tags, MAX(tu.Followers_count)
+FROM TWEETS_DETAILS AS td 
+INNER JOIN Tweet_Tags AS tg ON td.TWEET_ID = tg.TWEET_ID
+INNER JOIN Twitter_User tu ON tu.Twitter_Handle = td.Twitter_Handle;
+
+SELECT Tweet_Text, MAX(tu.Followers_count)
+FROM TWEETS_DETAILS AS td 
+INNER JOIN Twitter_User tu ON tu.Twitter_Handle = td.Twitter_Handle;
